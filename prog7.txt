@@ -1,0 +1,62 @@
+#include stdio.h
+#include stdlib.h
+#define ROZ 150
+struct element
+  { char[ROZ] imie;
+  char[ROZ] nazwisko;
+  int rokur;
+  struct element next
+  };
+
+ 
+void wypisz(stuct element record)
+{
+   struct list ptr=record;
+   while(ptr!=NULL)
+    {
+    fputs(ptr-imie,stdout);
+    fputs(ptr-nazwisko,stdout);
+    printf(%d, ptr-rokur);
+    ptr=ptr-next;
+    };
+}
+
+void dodaj(struct element head)
+{
+  struct element ptr=malloc(sizeof(struct element);
+  if(ptr==NULL)
+     return;
+ 
+  ptr-next=head;
+  printf(Podaj imie);
+  fgets(ptr-imie,ROZ,stdin);
+  printf(Podaj nazwisko);
+  fgets(ptr-nazwisko,ROZ,stdin);
+  printf(Podaj date urodzenia);
+  scanf(%d, &(ptr-rokur)); 
+  head=ptr;
+}
+
+void szukaj(struct element head)
+{
+  int rokur1;
+  sturct element ptr=head;
+  printf(Podaj date urodzenia);
+  scanf(%d, &rokur1); 
+  while (ptr!=NULL)
+  {
+      if(ptr-rokur==rokur1)
+      {
+     pritnf(znaleziony rekord to);
+     fputs(ptr-imie,stdout);
+     fputs(ptr-nazwisko,stdout);
+     printf(%d, ptr-rokur);
+      }     
+  ptr=ptr-next;
+  }
+ ptintf(nie znaleziono rekordu);
+}
+
+void usun(struct element head);
+
+
