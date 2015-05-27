@@ -1,0 +1,27 @@
+#include <stdio.h>
+#define ROZMIAR 128
+
+main(void)
+{
+char tab[ROZMIAR];
+char zmieniana;
+
+printf("Wprowadü tekst: ");
+fgets(tab,ROZMIAR,stdin);
+
+int i, koniec, zatrzymaj;
+
+for(i=0;tab[i] != '\0';i++)
+    {
+    }
+    koniec = (i-2);
+
+     for(i=0;i<=(koniec / 2);i++)
+     {
+        zmieniana = tab[i];
+        tab[i] = tab[(koniec-i)];
+        tab[(koniec-i)] = zmieniana;
+     }
+
+puts(tab);
+}
