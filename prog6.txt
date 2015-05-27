@@ -1,0 +1,148 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define ROZMIAR 128
+    
+struct kontakt
+  { char* imie;
+  char* nazwisko;
+  long int numer;
+  int indeks;
+  };
+ 
+int dodaj(int *n,struct kontakt** tablica)
+    { char imie[ROZMIAR];
+    char nazwisko[ROZMIAR];
+    long int numer;
+    int indeks;
+    int i,np=*n;
+    fgets(imie,ROZMIAR,stdin);
+    printf("Podaj imie:");
+    fgets(imie,ROZMIAR,stdin);
+    printf("Podaj nazwisko:");
+    fgets(nazwisko,ROZMIAR,stdin);
+    printf("Podaj numer:");
+    scanf("%ld",&numer);
+    indeks=np+1;
+    struct kontakt* tab = (struct kontakt*)malloc((*n+1)*sizeof(struct kontakt));
+    if(tab==NULL)
+        {
+        return -1;
+        }
+    int przepisz;
+        for(przepisz=0; przepisz<*n; przepisz++)
+            {
+            tab[przepisz]=(*tablica)[przepisz];
+            }   
+    tab[np].imie=(char*)malloc(strlen(imie)+1);
+    if(tab[np].imie==NULL)
+        {
+        return -1;
+        }
+ 
+    strcpy(tab[np].imie,imie);
+    tab[np].nazwisko =(char*)malloc(strlen(nazwisko)+1);
+    if(tab[np].nazwisko==NULL)
+        {
+        return -1;
+        }
+    strcpy(tab[np].nazwisko ,nazwisko);
+    tab[np].numer=numer;   
+    tab[np].indeks=indeks;
+    free(*tablica);
+    *tablica=tab;
+    return 1;   
+    }
+    
+   
+void ogladaj(int n, struct kontakt *tab )
+    {int i;
+     for(i=0; i<n; i++)
+        {
+        printf("%d.\n",tab[i].indeks);   
+        printf("Imie: %s",tab[i].imie);
+        printf("Nazwisko: %s",tab[i].nazwisko);
+        printf("Nr telefonu: %ld\n\n", tab[i].numer);
+        }
+    }
+    
+   
+int szukaj(int n, struct kontakt *tab )
+    {long int numer;
+    int i;
+    printf("Podaj numer telefonu:");
+    scanf("%d",&numer);
+    for(i=0;i<n;i++)
+        {if(tab[i].numer==numer)
+        {
+        return i+1;
+        }
+    }
+    return -1;   
+    }
+   
+void wyswietl(struct kontakt *tab)
+    {printf("\n\n%d.\n",(*tab).indeks);   
+     printf("Imie: %s",(*tab).imie);
+     printf("Nazwisko: %s",(*tab).nazwisko);
+     printf("Nr telefonu: %ld\n\n", (*tab).numer);
+    }
+    int main()
+    {printf("Ksiazka telefoniczna:\n");
+     int wywolanie=6, n=0, proces, numer;
+     struct kontakt* tab=NULL;
+     while(wywolanie!=5)
+    {
+    printf("\n\nJezeli chcesz dodac wpis wcisnij: 1\njezeli chcesz znalezc wpis wcisnij: 2\njezeli chcesz wyswietlic wpis wcisnij: 3\njezeli chcesz obejrzec cala baze danych wcisnij: 4\n");
+    printf("Jezeli chcesz wyjsc wcisnij: 5\n");
+    scanf("%d",&wywolanie);
+    if(wywolanie==1)
+    {
+       proces=dodaj(&n,&tab);
+    if(proces==-1)
+    {
+    printf("Blad!! nie udalo sie dodac wpisu\n");
+    }
+    else
+    {
+    printf("\nUtworzono nowy wpis\n");
+    n++;
+    }   
+    wywolanie=6;
+    
+    }
+    if(wywolanie==2)
+    {
+    numer=szukaj(n,tab);
+    if (numer==-1)
+    {
+    printf("\nBrak rekordu zawierajacego podany numer!\n");   
+    }
+    else
+    {
+    printf("\nIndeks rekordu zawierajacy podany numer telefonu to:%d\n",numer);   
+    }   
+    wywolanie=6;   
+    }
+    if(wywolanie==3)
+    {printf("\nPodaj numer indeksu funkcji ktora ma byc wyswietlona:");
+    scanf("%d",&numer);
+    if((numer<1)||(numer>n))
+    {
+    printf("\nPodales zly numer indeksu");   
+    }
+    else
+    {
+    wyswietl(&tab[numer-1]);
+    }
+    wywolanie=6;   
+    }   
+    if(wywolanie==4)
+    {
+    ogladaj(n,tab);
+    wywolanie=6;
+    }   
+    }
+    free(tab);   
+    printf("KONIEC PROGRAMU");
+    }
