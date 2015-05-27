@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <math.h>
+
+struct zespolona
+{
+  float re;
+  float im;
+}; 
+
+
+
+
+struct zespolona suma(struct zespolona z1, struct zespolona z2)
+{
+    struct zespolona wynik;
+    wynik.re = z1.re + z2.re;
+    wynik.im = z1.im + z2.im;
+    return wynik;
+}   
+
+
+
+
+
+float modul(struct zespolona z1)
+
+{
+    float modul;
+    modul = sqrt(z1.re*z1.re+z1.im*z1.im);
+    return modul;
+}
+
+struct zespolona sprzezenie(struct zespolona z1)
+ 
+{
+    struct zespolona sprzezenie;
+    sprzezenie.re = z1.re;
+    sprzezenie.im = -z1.im;
+    return sprzezenie;
+}   
+ 
+void wypisz_zesp(struct zespolona z)
+{
+   printf("%.2f %+.2fi \n", z.re, z.im);
+}
+
+
+main()
+{
+      struct zespolona z1;
+      struct zespolona z2;
+      struct zespolona c,c2;
+      float c1;
+      z1.re=2;
+      z1.im=4;
+      z2.re=3;
+      z2.re=7;
+     
+
+c=suma(z1,z2);     
+wypisz_zesp(c);
+
+c1=modul(z1);
+printf("%f\n",c1);
+
+ 
+c2=sprzezenie(z1);
+wypisz_zesp(c2);
+
+}
