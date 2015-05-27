@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int *fun(int n)
+  {
+    int *ptr;
+    int licz;
+    ptr = malloc(n * sizeof(int));
+    if(ptr==NULL)
+      return NULL;
+    for(licz=0;licz<n;licz++)
+      {
+      ptr[licz]=2*licz+1;
+      }
+  return ptr;   
+  }
+main()
+
+{
+  int rozmiar;
+  int *tablica;
+  int i;
+  printf("podaj rozmiar tablicy:\n");
+  scanf("%d", &rozmiar);
+  tablica = fun(rozmiar);
+  if(tablica==NULL)
+    {
+    printf("brak miejsca");
+    }
+  for(i=0;i<rozmiar;i++)
+    {
+      printf("%4d",tablica[i]);
+    }
+    printf("\n");
+ free(tablica);
+}
