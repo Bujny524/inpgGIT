@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+    
+#define ROZMIAR 100
+    
+char *deleteLastChar(char *s)
+{
+    int dlugosc = 0, i;
+    char *tmp;
+    
+    while(s[dlugosc] != '\0') ++dlugosc;
+    
+    tmp = (char*)calloc(dlugosc, sizeof(char));
+    
+    if(tmp == NULL)
+        return NULL;
+    
+    for(i = 0; i < dlugosc - 1; ++i)
+        tmp[i] = s[i];
+        tmp[i] = '\0';
+    
+    free(s);
+    
+    return tmp;
+}
+    
+int main()
+{
+ int i;
+ char *ptab;
+    
+ ptab = (char*)calloc(ROZMIAR, sizeof(char));
+    if(ptab == NULL)
+    {
+    printf("\nBlad przydzielenia pamieci!\n");
+    getchar();
+    return -1;
+    }
+    
+printf("Podaj napis: ");
+fgets(ptab, ROZMIAR, stdin);
+    
+ptab = deleteLastChar(ptab);
+    if(ptab == NULL)
+    {
+    printf("\nBlad przydzielenia pamieci!\n");
+    getchar();
+    return -1;
+    }
+    
+fputs(ptab, stdout);
+printf("\n");
+    
+ptab = deleteLastChar(ptab);
+    if(ptab == NULL)
+    {
+    printf("\nBlad przydzielenia pamieci!\n");
+    getchar();
+    return -1;
+    }
+    
+fputs(ptab, stdout);
+    
+    free(ptab);
+    
+    return 0;
+}
