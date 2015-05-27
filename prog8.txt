@@ -1,0 +1,28 @@
+#include <stdio.h>
+int poziomy;
+int ilosc_gwiazdek=1;
+int a, b, c, d;
+main()
+
+{
+    printf("wpisz ilosc poziomow: ");
+    scanf("%d", &poziomy);
+    b=poziomy;
+    
+    for(a=1;a<=poziomy;a++)
+    {
+        
+            for(c=1;c<b;c++)
+            {
+            putchar(' ');
+            }
+        b--;
+            for(d=1;d<=ilosc_gwiazdek;d++)
+            {
+            putchar('*');    
+            }
+        printf("\n");    
+        ilosc_gwiazdek=ilosc_gwiazdek+2;
+    }
+
+
