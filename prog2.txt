@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+    
+#define ROZMIAR 10
+    
+void add(int **ptab, int n, int new_elem)
+    {
+    int *tmp = (int*)malloc((n+1) * sizeof(int));
+    int i;
+    
+    if(tmp == NULL)
+    {
+    *ptab = NULL;
+    return;
+    }
+    
+    for(i = 0; i < n; ++i)
+    tmp[i] = (*ptab)[i];
+    tmp[n] = new_elem;
+    
+        free(*ptab);
+    
+        *ptab = tmp;
+    }
+    
+ int main()
+ {
+    int *tab = NULL;
+    int i, element;
+    
+    for(i = 0; i < ROZMIAR; ++i)
+        {
+        add(&tab, i, i);
+          if(tab == NULL)
+          {
+             printf("\nBlad!\n");
+           return 1;
+          }
+        }
+         
+    for(i = 0; i < ROZMIAR; ++i)
+    printf("%d\n", tab[i]);
+    
+    free(tab);
+    
+    return 0;
+ }
+     
