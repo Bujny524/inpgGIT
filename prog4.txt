@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define N 8
+
+void createNewMatrix(int** *ptab, int n)
+{
+int* matrix;
+int i;
+    matrix=malloc(n*n*sizeof(int));
+if(matrix==NULL)
+  {
+  *ptab=NULL;
+  return;
+  }
+for(i=0; i<n; i++)
+(*ptab)[i]=&matrix[i*n]; 
+return;
+}
+
+void fillMatrix(int** tab, int n)
+{
+int i, i2, natural=1;
+for(i=0;i<n;i++)
+for(i2=0;i2<n;i2++)
+  {
+  tab[i][i2]=natural;
+  natural++;
+  }
+}
+
+void deleteNewMatrix(int*** ptab)
+{
+free(*ptab);
+*ptab=NULL;
+printf("Pamiec zostala zwolniona\n");
+}
+
+main()
+{
+int dim=N, i, i2;
+int** tab;
+tab=malloc(dim*sizeof(int*));
+  if(tab==NULL)
+  {
+  printf("nie ma miejsca\n");
+  return;
+  }
+createNewMatrix(&tab,dim);
+  if(tab==NULL)
+  printf("nie ma miejsca\n");
+fillMatrix(tab,dim);
+    for(i=0;i<dim;i++)
+    {
+    for(i2=0;i2<dim;i2++)
+    printf("%4i",tab[i][i2]);
+    printf("\n");
+    }
+deleteNewMatrix(&tab);
+system("pause");
+}
